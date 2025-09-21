@@ -41,13 +41,17 @@ class EventController extends Controller
             'description' => 'nullable|string',
             'datetime' => 'required|date',
             'location' => 'nullable|string|max:255',
+            'chat_message_id' => 'nullable|exists:messages,id',
+            'created_from_chat' => 'boolean',
         ]);
-
+    
         $request->user()->events()->create([
             'title' => $request->title,
             'description' => $request->description,
             'datetime' => $request->datetime,
             'location' => $request->location,
+            'chat_message_id' => $request->chat_message_id,
+            'created_from_chat' => $request->created_from_chat ?? false,
         ]);
 
         return redirect()->route('events.index')->with('success', 'イベントを作成しました！');
