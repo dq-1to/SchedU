@@ -29,4 +29,5 @@ class Event extends Model
     {
         return $this->belongsTo(Message::class, 'chat_message_id');
     }
+
 }
