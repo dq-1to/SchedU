@@ -16,7 +16,22 @@ class EventController extends Controller
 
     public function create()
     {
-        return view('events.create');
+        $messageData = null;
+        $request = request();
+        if ($request->has('message_id')) {
+            $message = \App\Models\Message::find($request->message_id);
+            if ($message) {
+                $messageData = [
+                    'title' => '予定: ' . $message->content,
+                    'description' => $message->user->name . 'さんのメッセージから作成',
+                    'datetime' => now()->format('Y-m-d H:i'), // とりあえず現在時刻
+                    'location' => '',
+                ];
+            }
+        }
+
+        return view('events.create', compact('messageData'));
+
     }
 
     public function store(Request $request)
@@ -24,12 +39,18 @@ class EventController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'event_date' => 'required|date',
+            'datetime' => 'required|date',
+            'location' => 'nullable|string|max:255',
         ]);
-
-        $request->user()->events()->create($request->only('title','description','event_date'));
-
-        return redirect()->route('events.index')->with('success','イベントを作成しました！');
+    
+        $request->user()->events()->create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'datetime' => $request->datetime,
+            'location' => $request->location,
+        ]);
+    
+        return redirect()->route('events.index')->with('success', 'イベントを作成しました！');
     }
 
     public function edit(Event $event)
