@@ -18,7 +18,7 @@
                 <input 
                     type="text" 
                     name="content" 
-                    placeholder="9/25 14:00 開発打ち合わせ" 
+                    placeholder="9/25 14:00 開発打ち合わせ 本社" 
                     class="flex-1 border rounded-l px-3 py-2"
                 >
                 <button type="submit" class="bg-blue-500 text-white px-4 rounded-r">送信</button>
