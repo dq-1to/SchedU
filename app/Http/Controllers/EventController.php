@@ -54,7 +54,7 @@ class EventController extends Controller
             'created_from_chat' => $request->created_from_chat ?? false,
         ]);
 
-        return redirect()->route('events.index')->with('success', 'イベントを作成しました！');
+        return redirect()->route('calendar.index')->with('success', 'イベントを作成しました！');
     }
 
     public function edit(Event $event)
@@ -78,13 +78,13 @@ class EventController extends Controller
             'location' => $request->location,
         ]);
 
-        return redirect()->route('events.index')->with('success', 'イベントを更新しました！');
+        return redirect()->route('calendar.index')->with('success', 'イベントを更新しました！');
     }
 
     public function destroy(Event $event)
     {
         $event->delete();
-        return redirect()->route('events.index')->with('success', 'イベントを削除しました！');
+        return redirect()->route('calendar.index')->with('success', 'イベントを削除しました！');
     }
 
     // カレンダーの詳細画面
