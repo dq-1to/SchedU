@@ -30,10 +30,14 @@ services:
     volumes:
       - db-data:/var/lib/mysql
 
-  adminer:            # ← services: の“中”に置く
-    image: adminer
+  phpmyadmin:
+    image: phpmyadmin:latest
     ports:
-      - "8080:8080"
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
     depends_on:
       - db
 
