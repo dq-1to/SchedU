@@ -81,6 +81,7 @@ class EventController extends Controller
         return redirect()->route('calendar.index')->with('success', 'イベントを更新しました！');
     }
 
+    // カレンダーの削除
     public function destroy(Event $event)
     {
         $event->delete();
