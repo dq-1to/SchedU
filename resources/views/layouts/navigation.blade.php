@@ -15,10 +15,12 @@
                     <x-nav-link :href="route('chat.index')" :active="request()->routeIs('chat.index')">
                         {{ __('Chat') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')">
+                    <!-- <x-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')">
                         {{ __('Events') }}
+                    </x-nav-link> -->
+                    <x-nav-link :href="route('calendar.index')" :active="request()->routeIs('calendar.index')">
+                        {{ __('Calendar') }}
                     </x-nav-link>
-
                 </div>
             </div>
 

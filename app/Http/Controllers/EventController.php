@@ -19,17 +19,17 @@ class EventController extends Controller
     {
         $messageData = null;
         $request = request();
-    
+
         if ($request->has('message_id')) {
             $message = \App\Models\Message::find($request->message_id);
-    
+
             if ($message) {
                 // Service を呼び出し
                 $parser = new MessageParser();
                 $messageData = $parser->parse($message);
             }
         }
-    
+
         return view('events.create', compact('messageData'));
     }
 
@@ -44,7 +44,7 @@ class EventController extends Controller
             'chat_message_id' => 'nullable|exists:messages,id',
             'created_from_chat' => 'boolean',
         ]);
-    
+
         $request->user()->events()->create([
             'title' => $request->title,
             'description' => $request->description,
@@ -54,7 +54,7 @@ class EventController extends Controller
             'created_from_chat' => $request->created_from_chat ?? false,
         ]);
 
-        return redirect()->route('events.index')->with('success', 'イベントを作成しました！');
+        return redirect()->route('calendar.index')->with('success', 'イベントを作成しました！');
     }
 
     public function edit(Event $event)
@@ -78,13 +78,27 @@ class EventController extends Controller
             'location' => $request->location,
         ]);
 
-        return redirect()->route('events.index')->with('success', 'イベントを更新しました！');
+        return redirect()->route('calendar.index')->with('success', 'イベントを更新しました！');
     }
 
+    // カレンダーの削除
     public function destroy(Event $event)
     {
         $event->delete();
-        return redirect()->route('events.index')->with('success', 'イベントを削除しました！');
+        return redirect()->route('calendar.index')->with('success', 'イベントを削除しました！');
+    }
+
+    // カレンダーの詳細画面
+    public function show(Event $event)
+    {
+        return view('events.show', compact('event'));
+    }
+
+    // カレンダーの新規作成画面
+    public function createFromCalendar(Request $request)
+    {
+        $selectedDate = $request->query('date');
+        return view('events.createFromCalendar', compact('selectedDate'));
     }
 
 }
