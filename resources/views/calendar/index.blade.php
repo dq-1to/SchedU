@@ -22,13 +22,13 @@
                 locale: 'ja',
                 events: '{{ route('calendar.events') }}',
 
-                // ✅ イベントクリック（詳細ページへ）
+                // イベントクリック（詳細ページへ）
                 eventClick: function (info) {
                     info.jsEvent.preventDefault();
                     if (info.event.url) window.location.href = info.event.url;
                 },
 
-                // ✅ 日付クリック（新規作成ページへ）
+                // 日付クリック（新規作成ページへ）
                 dateClick: function (info) {
                     window.location.href = '/events/create?date=' + info.dateStr;
                 },
