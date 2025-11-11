@@ -43,8 +43,10 @@ SNSライクなスケジュール管理アプリです。
 
 ```bash
 docker compose up -d
+```
+---
 
-### 開発URL
+## 開発URL
 
 アプリ本体: http://localhost
 phpMyAdmin: http://localhost:8081
@@ -55,21 +57,30 @@ phpMyAdmin: http://localhost:8081
 ## Setup
 
 # 依存関係インストール
+```bash
 composer install
 npm install
+```
 
 # 環境ファイル設定
+```bash
 cp .env.example .env
+```
 
 # アプリキー生成
+```bash
 php artisan key:generate
+```
 
 # DBマイグレーション
+```bash
 php artisan migrate
+```
 
 # Viteビルド
+```bash
 npm run build
-
+```
 
 ## Commit Log
 
