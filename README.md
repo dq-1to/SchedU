@@ -51,8 +51,8 @@ docker compose up -d
 
  - アプリ本体: http://localhost
  - phpMyAdmin: http://localhost:8081
- -- ユーザー: root
- -- パスワード: root
+ - - ユーザー: root
+ - - パスワード: root
 
 ---
 
