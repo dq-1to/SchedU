@@ -11,10 +11,8 @@
         </div>
     </div>
 
-    <!-- ✅ FullCalendar の読み込みを先に -->
-    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet'>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
-    {{-- ↑ ここが大事。「main.min.js」ではなく「index.global.min.js」を使う！ --}}
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -22,7 +20,11 @@
         const calendar = new FullCalendar.Calendar(el, {
             initialView: 'dayGridMonth',
             locale: 'ja',
-            events: '{{ route('calendar.events') }}',
+            events: '{{ route('calendar.events') }}', 
+            eventClick: function(info) {
+                info.jsEvent.preventDefault();
+                if (info.event.url) window.location.href = info.event.url;
+            },
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
@@ -35,7 +37,7 @@
 
     <style>
         #calendar {
-            background: white;
+            background: #fff;
             padding: 10px;
             min-height: 600px;
         }
